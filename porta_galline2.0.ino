@@ -13,7 +13,7 @@ void setup() {
   stepper.setRpm(13); //stepper makes 13 spins per minute
   pinMode(LED_BUILTIN,OUTPUT); 
   digitalWrite(LED_BUILTIN, LOW); //Turn off the builtin led for power saving
-  Serial.begin(9600);
+  //Serial.begin(9600);
   // (Optional)
   // if you want to save even more electricity you can uncomment these two lines that slow down the clock speed of the arduino.
   // Obviously the stepper speed is also slowed down and it will go slower.
@@ -26,7 +26,7 @@ void setup() {
 void loop() {
   // Read the light
   light = analogRead(A0);
-  Serial.println(light);
+  //Serial.println(light);
   if (light > lightLimitUp && door == 0 ){
     openClose();
   } else if (light < lightLimitDown && door == 1){
