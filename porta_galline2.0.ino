@@ -2,38 +2,40 @@
 
 #include <CheapStepper.h>
 
-const int lightLimit = 300;
+const int lightLimitDown = 300;
+const int lightLimitUp = 200;
 int door = 0  ; //0 closed, 1 opened
 int light;
 
 CheapStepper stepper (8,9,10,11);
 
 void setup() {
-  stepper.setRpm(13); //spetter makes 13 spins per minute
+  stepper.setRpm(13); //stepper makes 13 spins per minute
   pinMode(LED_BUILTIN,OUTPUT); 
   digitalWrite(LED_BUILTIN, LOW); //Turn off the builtin led for power saving
-
+  Serial.begin(9600);
   // (Optional)
   // if you want to save even more electricity you can uncomment these two lines that slow down the clock speed of the arduino.
   // Obviously the stepper speed is also slowed down and it will go slower.
   // Be careful if you use the delay statement in your code that slowing down the clock in half, 1000 ms will correspond to 2000 ms
   
   //CLKPR = 0x80;
-  //CLKPR = 0x01; //clocl speed half //0x02 -> 1/4 speed .... 0x08 1/256 speed (1/256 is the minimum speed ATmega328P can reach)
+  //CLKPR = 0x01; //clock speed half //0x02 -> 1/4 speed .... 0x08 1/256 speed (1/256 is the minimum speed ATmega328P can reach)
 }
 
 void loop() {
   // Read the light
   light = analogRead(A0);
-  if (light > lightLimit && door == 0 ){
+  Serial.println(light);
+  if (light > lightLimitUp && door == 0 ){
     openClose();
-  } else if (light < lightLimit && door == 1){
+  } else if (light < lightLimitDown && door == 1){
     openClose();
   }
     
-  //power down for 10 minutes (8 seconds for 75 times = 600 seconds -> 10 minutes)
-  // You can change the 75 as you want (eg: if you use 225 the arduino sleeps for 30 minutes)
-  for (int i = 0 ;  i < 75 ; i++){
+  //power down for 2 minutes (8 seconds for 15 times = 120 seconds -> 2 minutes)
+  // You can change the 15 as you want (eg: if you use 75 the arduino sleeps for 10 minutes)
+  for (int i = 0 ;  i < 15 ; i++){
     LowPower.powerDown(SLEEP_8S, ADC_OFF, BOD_OFF);
   }
 }
