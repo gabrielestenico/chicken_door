@@ -3,7 +3,7 @@
 #include <CheapStepper.h>
 
 const int lightLimitDown = 300;
-const int lightLimitUp = 200;
+const int lightLimitUp = 300;
 int door = 0  ; //0 closed, 1 opened
 int light;
 
