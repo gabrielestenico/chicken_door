@@ -33,9 +33,9 @@ void loop() {
     openClose();
   }
     
-  //power down for 2 minutes (8 seconds for 15 times = 120 seconds -> 2 minutes)
-  // You can change the 15 as you want (eg: if you use 75 the arduino sleeps for 10 minutes)
-  for (int i = 0 ;  i < 15 ; i++){
+  //power down for 10 minutes (8 seconds for 15 times = 600 seconds -> 10 minutes)
+  // You can change the 75 as you want (eg: if you use 15 the arduino sleeps for 2 minutes)
+  for (int i = 0 ;  i < 75 ; i++){
     LowPower.powerDown(SLEEP_8S, ADC_OFF, BOD_OFF);
   }
 }
